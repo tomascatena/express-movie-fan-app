@@ -15,7 +15,10 @@ router.use((req, res, next) => {
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.set('Content-Security-Policy', "default-src * 'self' 'unsafe-inline'");
+  res.set(
+    'Content-Security-Policy',
+    "default-src *jquery.com *cdnjs.cloudflare.com *maxcdn.bootstrapcdn.com 'self' 'unsafe-inline'"
+  );
   res.set('Content-Security-Policy', "img-src * 'self' data: https:;");
 
   request.get(nowPlayingURL, (error, response, movieData) => {
@@ -30,7 +33,10 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/movie/:id', (req, res, next) => {
-  res.set('Content-Security-Policy', "default-src * 'self' 'unsafe-inline'");
+  res.set(
+    'Content-Security-Policy',
+    "default-src *jquery.com *cdnjs.cloudflare.com *maxcdn.bootstrapcdn.com 'self' 'unsafe-inline'"
+  );
   res.set('Content-Security-Policy', "img-src * 'self' data: https:;");
 
   // res.json(req.params.id);
@@ -47,7 +53,10 @@ router.get('/movie/:id', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
-  res.set('Content-Security-Policy', "default-src * 'self' 'uns afe-inline' ");
+  res.set(
+    'Content-Security-Policy',
+    "default-src *jquery.com *cdnjs.cloudflare.com *maxcdn.bootstrapcdn.com 'self' 'unsafe-inline'"
+  );
   res.set('Content-Security-Policy', "img-src * 'self' data: https:;");
 
   const userSearchTerm = encodeURI(req.body.movieSearch);
