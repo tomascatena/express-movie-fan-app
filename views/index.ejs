@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie App</title>
+    <% include head %>
+  </head>
+  <body>
+    <% include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="display-4 text-center m-3"><%= title %><%= search %></h1>
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <% parsedData.forEach(movie => { %>
+            <div class="col-md-3 col-sm-4">
+              <div class="card mb-4" style="width: 18rem">
+                <a href="/movie/<%= movie.id %>">
+                  <img
+                    class="card-img-top"
+                    src="<%= baseImageURL + movie.poster_path %>"
+                    alt="<%= movie.title %>"
+                /></a>
+                <div class="card-body">
+                  <h5 class="card-title m-0 text-center"><%= movie.title %></h5>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% include footer %>
+
+    <script src="/javascripts/jquery-3.2.1.slim.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+  </body>
+</html>

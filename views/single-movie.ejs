@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie App</title>
+    <% include head %>
+  </head>
+  <body>
+    <% include navbar %>
+
+    <div class="container">
+      <div class="jumbotron my-5">
+        <div class="row">
+          <div class="col-lg-8 col-md-12">
+            <h1 class="display-4"><%= parsedMovieDetails.title %></h1>
+            <p class="lead"><%= parsedMovieDetails.tagline %></p>
+            <hr class="my-4" />
+            <p>Original title: <%= parsedMovieDetails.original_title %></p>
+            <p><%= parsedMovieDetails.overview %></p>
+            <p class="lead">
+              <button
+                class="btn btn-outline-primary btn"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                More Info
+              </button>
+              <a
+                class="btn btn-outline-primary btn"
+                href="<%= parsedMovieDetails.homepage %>"
+                target="_blank"
+                role="button"
+                >Movie Homepage</a
+              >
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card mb-3">
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    IMDB:
+                    <a
+                      href="https://www.imdb.com/title/<%= parsedMovieDetails.imdb_id %>"
+                      target="_blank"
+                      ><%= parsedMovieDetails.title %></a
+                    >
+                  </li>
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    Genres: <% parsedMovieDetails.genres.forEach( genre => { %>
+                    <%= genre.name %>, <% }) %>
+                  </li>
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    Budget: <% let movieBudget;
+                    (parseInt(parsedMovieDetails.budget) === 0) ? movieBudget =
+                    '-' : movieBudget = new Intl.NumberFormat('en-US', { style:
+                    'currency', currency: 'USD'
+                    }).format(parsedMovieDetails.budget) %> <%= movieBudget %>
+                  </li>
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    Revenue: <% let movieRevenue;
+                    (parseInt(parsedMovieDetails.revenue) === 0) ? movieRevenue
+                    = '-' : movieRevenue = new Intl.NumberFormat('en-US', {
+                    style: 'currency', currency: 'USD'
+                    }).format(parsedMovieDetails.revenue) %> <%= movieRevenue %>
+                  </li>
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    Release Date: <%= parsedMovieDetails.release_date %>
+                  </li>
+                  <li
+                    class="list-group-item list-group-item-action list-group-item-light"
+                  >
+                    Production companies: <%
+                    parsedMovieDetails.production_companies.forEach( company =>
+                    { %> <%= company.name %>, <% }) %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 text-center">
+            <img
+              src="<%= baseImageURL + parsedMovieDetails.poster_path %>"
+              alt="<%= parsedMovieDetails.original_title %>"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% include footer %>
+
+    <script src="/javascripts/jquery-3.2.1.slim.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+  </body>
+</html>
